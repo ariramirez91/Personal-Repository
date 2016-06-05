@@ -1,0 +1,20 @@
+
+ods noproctitle;
+ods graphics / imagemap=on;
+
+proc logistic data=SALARY.TEST plots 
+    (maxpoints=none)=(roc);
+	class _workclass _education _marital_status _occupation _relationship _race 
+		_sex _native_country / param=glm;
+	model _50k(event='>50K')=age _fnlwgt _education_num _capital_gain 
+		_capital_loss _hours_per_week _workclass _education _marital_status 
+		_occupation _relationship _race _sex _native_country / link=logit 
+		selection=stepwise slentry=0.05 slstay=0.05 hierarchy=single technique=fisher;
+run;
+
+proc freq data=Salary.PredictedSalary  ; 
+table  I__50k  *_50k  / out = SALARY.ConfusionMatrix;
+run;
+
+proc print data =Salary.ConfusionMatrix;
+run;

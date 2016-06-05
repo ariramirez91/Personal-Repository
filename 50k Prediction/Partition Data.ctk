@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="UTF-8"?><Task schemaVersion="5.0">
+
+    <Registration>
+        <Name>Partition Data</Name>
+        <Description>The Partition Data task enables you to create partitions of data by simple or stratified random sampling.</Description>
+        <GUID>0eefb454-20bf-404c-850e-d2e8a454e957</GUID>
+        <Procedures/>
+        <Version>3.5</Version>
+        <Links>
+            <Link href="http://support.sas.com/documentation/onlinedoc/sasstudio/index.html">SAS Studio User's Guide</Link>
+            <Link href=""> </Link>
+            <Link href=""> </Link>
+            <Link href="http://support.sas.com/training/studio">SAS Tutorials</Link>
+        </Links>
+    </Registration>
+
+    <Metadata>
+        <DataSources>
+            <DataSource name="dataset" where="true">
+                <Roles>
+                    <Role maxVars="2" minVars="0" name="strataVariables" type="A">Stratify by:</Role>
+                </Roles>
+<!-- TODO: variables to include | include all variables 
+-->
+            </DataSource>
+        </DataSources>
+
+        <Options>
+            <Option inputType="string" name="dataTab">DATA</Option>
+            <Option inputType="string" name="dataGroup">DATA</Option>
+            <Option inputType="string" name="rolesGroup">ROLES</Option> 
+            <Option inputType="string" name="otherRolesGroup">ADDITIONAL ROLES</Option> 
+    
+            <Option inputType="string" name="optionsTab">OPTIONS</Option>
+
+            <Option decimalPlaces="0" defaultValue="1" increment="1" inputType="numstepper" invalidMessage="Enter an integer between 1 and 4, inclusive, for the number of partitions" maxValue="4" minValue="1" missingMessage="Enter an integer between 1 and 4, inclusive, for the number of partitions" name="nPartitions" promptMessage="Enter an integer between 1 and 4, inclusive, for the number of partitions" rangeMessage="Enter an integer between 1 and 4, inclusive, for the number of partitions" required="true" width="50px">Number of partitions:</Option>
+            
+            <Option defaultValue="0" inputType="checkbox" name="useRandomSeed">Specify the random seed</Option>
+            <Option decimalPlaces="0" indent="1" inputType="numbertext" invalidMessage="Enter an integer greater than 0 for the random seed" maxValue="999999999" minValue="1" missingMessage="Enter an integer greater than 0 for the random seed" name="randomSeed" promptMessage="Enter an integer greater than 0 for the random seed" rangeMessage="Enter an integer greater than 0 for the random seed" required="true" width="100px">Random seed:</Option>
+            
+            <Option inputType="string" name="outputGroup">OUTPUT DATA SET</Option>
+
+            <Option inputType="combobox" name="datasetsCombo">Partition data sets:</Option>
+            <Option inputType="string" name="oneDataSet">All partitions in one data set</Option>
+            <Option inputType="string" name="individualDataSets">Partitions in individual data sets</Option>
+
+            <Option defaultValue="Partition" indent="1" inputType="outputdata" name="outDsname" required="true" width="100%">Data set name:</Option>
+            <Option defaultValue="Partition1" indent="1" inputType="outputdata" name="partitionOutDsname1" required="true" width="100%">Partition 1 data set name:</Option>
+            <Option defaultValue="Partition2" indent="1" inputType="outputdata" name="partitionOutDsname2" required="true" width="100%">Partition 2 data set name:</Option>
+            <Option defaultValue="Partition3" indent="1" inputType="outputdata" name="partitionOutDsname3" required="true" width="100%">Partition 3 data set name:</Option>
+            <Option defaultValue="Partition4" indent="1" inputType="outputdata" name="partitionOutDsname4" required="true" width="100%">Partition 4 data set name:</Option>4
+
+            <Option inputType="string" name="showDataGroup">Show Output Data</Option>
+            <Option defaultValue="0" inputType="checkbox" name="showData">Show output data</Option>
+            <Option defaultValue="showSubsetDataChoice" inputType="combobox" name="showDataCombo">Show:</Option>
+            <Option inputType="string" name="showSubsetDataChoice">Show subset of output data</Option>
+            <Option inputType="string" name="showAllDataChoice">Show all output data</Option>
+            <Option decimalPlaces="0" defaultValue="10" increment="1" indent="1" inputType="numstepper" invalidMessage="Enter an integer greater than 0 for the number of observations to be shown" minValue="1" missingMessage="Enter an integer greater than 0 for the number of observations to be shown" name="subsetNobs" promptMessage="Enter an integer greater than 0 for the number of observations to be shown" rangeMessage="Enter an integer greater than 0 for the number of observations to be shown" required="true" width="100px">Number of observations to show:</Option>
+
+            <Option inputType="string" name="partitionGroup">PARTITION DATA</Option>
+            <Option decimalPlaces="1,15" indent="1" inputType="numbertext" invalidMessage="Enter a value greater than 0 and less than 1 for the proportion of cases for partition 1 in the data set" maxValue="0.9999999999" minValue="0.0000000001" missingMessage="Enter a value greater than 0 and less than 1 for the proportion of cases for partition 1 in the data set" name="partitionFraction1" promptMessage="Enter a value greater than 0 and less than 1 for the proportion of cases for partition 1 in the data set" rangeMessage="Enter a value greater than 0 and less than 1 for the proportion of cases for partition 1 in the data set" required="true" width="100px">Proportion of cases for partition 1:</Option>
+                
+            <Option decimalPlaces="1,15" indent="1" inputType="numbertext" invalidMessage="Enter a value greater than 0 and less than 1 for the proportion of cases for partition 2 in the data set" maxValue="0.9999999999" minValue="0.0000000001" missingMessage="Enter a value greater than 0 and less than 1 for the proportion of cases for partition 2 in the data set" name="partitionFraction2" promptMessage="Enter a value greater than 0 and less than 1 for the proportion of cases for partition 2 in the data set" rangeMessage="Enter a value greater than 0 and less than 1 for the proportion of cases for partition 2 in the data set" required="true" width="100px">Proportion of cases for partition 2:</Option>
+
+            <Option decimalPlaces="1,15" indent="1" inputType="numbertext" invalidMessage="Enter a value greater than 0 and less than 1 for the proportion of cases for partition 3 in the data set" maxValue="0.9999999999" minValue="0.0000000001" missingMessage="Enter a value greater than 0 and less than 1 for the proportion of cases for partition 3 in the data set" name="partitionFraction3" promptMessage="Enter a value greater than 0 and less than 1 for the proportion of cases for partition 3 in the data set" rangeMessage="Enter a value greater than 0 and less than 1 for the proportion of cases for partition 3 in the data set" required="true" width="100px">Proportion of cases for partition 3:</Option>
+
+            <Option decimalPlaces="1,15" indent="1" inputType="numbertext" invalidMessage="Enter a value greater than 0 and less than 1 for the proportion of cases for partition 4 in the data set" maxValue="0.9999999999" minValue="0.0000000001" missingMessage="Enter a value greater than 0 and less than 1 for the proportion of cases for partition 4 in the data set" name="partitionFraction4" promptMessage="Enter a value greater than 0 and less than 1 for the proportion of cases for partition 4 in the data set" rangeMessage="Enter a value greater than 0 and less than 1 for the proportion of cases for partition 4 in the data set" required="true" width="100px">Proportion of cases for partition 4:</Option>
+
+            <Option defaultValue="_Partition_" indent="1" inputType="validationtext" invalidMessage="Enter a valid SAS variable name" missingMessage="Enter a valid SAS variable name" name="partitionVarName" regExp=".{1,32}" required="true" width="200px">Variable name for partition values:</Option>
+            <Option defaultValue="Partition 1" indent="2" inputType="validationtext" invalidMessage="Enter a value to identify data partition 1" missingMessage="Enter a value to identify data partition 1" name="partitionDataValue1" regExp=".*" required="true" width="200px">ID value for partition 1 data:</Option>
+            <Option defaultValue="Partition 2" indent="2" inputType="validationtext" invalidMessage="Enter a value to identify data partition 2" missingMessage="Enter a value to identify data partition 2" name="partitionDataValue2" regExp=".*" required="true" width="200px">ID value for partition 2 data:</Option>
+            <Option defaultValue="Partition 3" indent="2" inputType="validationtext" invalidMessage="Enter a value to identify data partition 3" missingMessage="Enter a value to identify data partition 3" name="partitionDataValue3" regExp=".*" required="true" width="200px">ID value for partition 3 data:</Option>
+            <Option defaultValue="Partition 4" indent="2" inputType="validationtext" invalidMessage="Enter a value to identify data partition 4" missingMessage="Enter a value to identify data partition 4" name="partitionDataValue4" regExp=".*" required="true" width="200px">ID value for partition 4 data:</Option>
+
+            <Option defaultValue="0" inputType="checkbox" name="useNonSampledObs">Include non-sampled observations</Option>
+            <Option defaultValue="" indent="2" inputType="validationtext" invalidMessage="Enter a value to identify the non-sampled cases" missingMessage="Enter a value to identify the non-sampled cases" name="nonSampledPartitionDataValue" regExp=".*" width="200px">ID value for non-sampled cases:</Option>
+        
+            <Option inputType="string" name="subsetTitle">Subset of {1}</Option>
+
+        </Options>
+    </Metadata>
+
+    <UI>
+        <Container option="dataTab">
+            <Group open="true" option="dataGroup">
+                <DataItem data="dataset"/>
+            </Group>
+            <Group open="true" option="rolesGroup">
+                <RoleItem role="strataVariables"/>
+            </Group>
+
+            <Group open="true" option="partitionGroup">
+                <OptionItem option="nPartitions"/>
+                    
+                <OptionItem option="partitionFraction1"/>                   
+                <OptionItem option="partitionFraction2"/>                                   
+                <OptionItem option="partitionFraction3"/>
+                <OptionItem option="partitionFraction4"/>
+                    
+                <OptionItem option="useRandomSeed"/>
+                <OptionItem option="randomSeed"/>
+            </Group>
+
+            <Group open="true" option="outputGroup">
+                <OptionChoice option="datasetsCombo">
+                    <OptionItem option="oneDataSet"/>
+                    <OptionItem option="individualDataSets"/>
+                </OptionChoice>
+                        
+                <OptionItem option="outDsname"/>
+                <OptionItem option="partitionOutDsname1"/>
+                <OptionItem option="partitionOutDsname2"/>
+                <OptionItem option="partitionOutDsname3"/>
+                <OptionItem option="partitionOutDsname4"/>
+
+                <OptionItem option="useNonSampledObs"/>
+
+                <OptionItem option="partitionVarName"/>
+                <OptionItem option="partitionDataValue1"/>
+                <OptionItem option="partitionDataValue2"/>
+                <OptionItem option="partitionDataValue3"/>
+                <OptionItem option="partitionDataValue4"/>
+                <OptionItem option="nonSampledPartitionDataValue"/>
+                    
+                <Group open="true" option="showDataGroup">
+                    <OptionItem option="showData"/>
+                    <OptionChoice option="showDataCombo">
+                        <OptionItem option="showSubsetDataChoice"/>
+                        <OptionItem option="showAllDataChoice"/>
+                    </OptionChoice>
+                    <OptionItem option="subsetNobs"/>
+                </Group>
+            </Group>
+        </Container>
+    </UI>
+
+    <Dependencies>
+        <Dependency condition="($datasetsCombo == 'oneDataSet')">
+            <Target action="show" conditionResult="true" option="outDsname"/>
+            <Target action="hide" conditionResult="false" option="outDsname"/>          
+            <Target action="show" conditionResult="true" option="partitionVarName"/>
+            <Target action="hide" conditionResult="false" option="partitionVarName"/>           
+            <Target action="show" conditionResult="true" option="useNonSampledObs"/>
+            <Target action="hide" conditionResult="false" option="useNonSampledObs"/>           
+        </Dependency>
+        <Dependency condition="($datasetsCombo == 'oneDataSet' &amp;&amp; $useNonSampledObs == '1')">
+            <Target action="show" conditionResult="true" option="nonSampledPartitionDataValue"/>
+            <Target action="hide" conditionResult="false" option="nonSampledPartitionDataValue"/>           
+        </Dependency>
+        <Dependency condition="($useRandomSeed == '1')">
+            <Target action="show" conditionResult="true" option="randomSeed"/>
+            <Target action="hide" conditionResult="false" option="randomSeed"/>
+        </Dependency>
+        <Dependency condition="($datasetsCombo == 'individualDataSets')">
+            <Target action="show" conditionResult="true" option="partitionOutDsname1"/>
+            <Target action="hide" conditionResult="false" option="partitionOutDsname1"/>
+        </Dependency>
+        <Dependency condition="($datasetsCombo == 'oneDataSet')">
+            <Target action="show" conditionResult="true" option="partitionDataValue1"/>
+            <Target action="hide" conditionResult="false" option="partitionDataValue1"/>
+        </Dependency>
+        <Dependency condition="($nPartitions  &gt;= 2)">
+            <Target action="show" conditionResult="true" option="partitionFraction2"/>
+            <Target action="hide" conditionResult="false" option="partitionFraction2"/>
+        </Dependency>
+        <Dependency condition="($datasetsCombo == 'individualDataSets' &amp;&amp; $nPartitions &gt;= 2)">
+            <Target action="show" conditionResult="true" option="partitionOutDsname2"/>
+            <Target action="hide" conditionResult="false" option="partitionOutDsname2"/>
+        </Dependency>
+        <Dependency condition="($datasetsCombo == 'oneDataSet' &amp;&amp; $nPartitions &gt;= 2)">
+            <Target action="show" conditionResult="true" option="partitionDataValue2"/>
+            <Target action="hide" conditionResult="false" option="partitionDataValue2"/>
+        </Dependency>
+        <Dependency condition="($nPartitions &gt;= 3)">
+            <Target action="show" conditionResult="true" option="partitionFraction3"/>
+            <Target action="hide" conditionResult="false" option="partitionFraction3"/>
+        </Dependency>
+        <Dependency condition="($datasetsCombo == 'individualDataSets' &amp;&amp; $nPartitions &gt;= 3)">
+            <Target action="show" conditionResult="true" option="partitionOutDsname3"/>
+            <Target action="hide" conditionResult="false" option="partitionOutDsname3"/>
+        </Dependency>
+        <Dependency condition="($datasetsCombo == 'oneDataSet' &amp;&amp; $nPartitions &gt;= 3)">
+            <Target action="show" conditionResult="true" option="partitionDataValue3"/>
+            <Target action="hide" conditionResult="false" option="partitionDataValue3"/>
+        </Dependency>
+        <Dependency condition="($nPartitions &gt;= 4)">
+            <Target action="show" conditionResult="true" option="partitionFraction4"/>
+            <Target action="hide" conditionResult="false" option="partitionFraction4"/>
+        </Dependency>
+        <Dependency condition="($datasetsCombo == 'individualDataSets' &amp;&amp; $nPartitions &gt;= 4)">
+            <Target action="show" conditionResult="true" option="partitionOutDsname4"/>
+            <Target action="hide" conditionResult="false" option="partitionOutDsname4"/>
+        </Dependency>
+        <Dependency condition="($datasetsCombo == 'oneDataSet' &amp;&amp; $nPartitions &gt;= 4)">
+            <Target action="show" conditionResult="true" option="partitionDataValue4"/>
+            <Target action="hide" conditionResult="false" option="partitionDataValue4"/>
+        </Dependency>
+        <Dependency condition="($showData == '1')">
+            <Target action="show" conditionResult="true" option="showDataCombo"/>
+            <Target action="hide" conditionResult="false" option="showDataCombo"/>
+        </Dependency>
+        <Dependency condition="($showData == '1' &amp;&amp; $showDataCombo == 'showSubsetDataChoice')">
+            <Target action="show" conditionResult="true" option="subsetNobs"/>
+            <Target action="hide" conditionResult="false" option="subsetNobs"/>
+        </Dependency>
+    </Dependencies>
+    
+    <Requirements>
+        <Requirement condition="!(             $datasetsCombo == 'oneDataSet' &amp;&amp;             $dataset.columnExists($partitionVarName)             )">
+            <Message nlsKey="partitionVarNameExistsinDatasetRequirementKey">The specified SAS variable name to hold the partition values is already in use in the data set.</Message>
+        </Requirement>
+         <!-- The sum of proportions must not exceed 1 -->
+        <Requirement condition="!(             $nPartitions == '2' &amp;&amp;              ($MathTool.add($MathTool.toDouble($partitionFraction1),$MathTool.toDouble($partitionFraction2) ) &gt; 1.0))">
+            )"&gt;
+            <Message nlsKey="prop1and2SumRequirementKey">The sum of the proportions for partitions 1 and 2 must be less than one.</Message>
+        </Requirement>
+        <Requirement condition="!(             $nPartitions == '3' &amp;&amp;              ($MathTool.add($MathTool.toDouble($partitionFraction1),$MathTool.toDouble($partitionFraction2),$MathTool.toDouble($partitionFraction3) ) &gt; 1.0))">
+            )"&gt;
+            <Message nlsKey="prop1and2and3SumRequirementKey">The sum of the proportions of partitions 1, 2, and 3 must be less than one.</Message>
+        </Requirement>
+        <Requirement condition="!(             $nPartitions == '4' &amp;&amp;              ($MathTool.add($MathTool.toDouble($partitionFraction1),$MathTool.toDouble($partitionFraction2),$MathTool.toDouble($partitionFraction3),$MathTool.toDouble($partitionFraction4) ) &gt; 1.0))">
+            )"&gt;
+            <Message nlsKey="prop1and2and3and4SumRequirementKey">The sum of the proportions of partitions 1, 2, 3, and 4 must be less than one.</Message>
+        </Requirement>
+
+
+         <!--Values for the partition variable must be different -->
+        <Requirement condition="!($datasetsCombo == 'oneDataSet' &amp;&amp;              $nPartitions == 1 &amp;&amp; $useNonSampledObs == '1' &amp;&amp;              ($partitionDataValue1 == $nonSampledPartitionDataValue)             )">
+            <Message nlsKey="partition1NonSampUniqueValuesRequirementKey">The ID values for partition 1 and the non-sampled cases must be different.</Message>
+        </Requirement>
+        <Requirement condition="!($datasetsCombo == 'oneDataSet' &amp;&amp;              $nPartitions == '2' &amp;&amp;              ($partitionDataValue1 == $partitionDataValue2)             )">
+            <Message nlsKey="partition12UniqueValuesRequirementKey">The ID values for partitions 1 and 2 must be different.</Message>
+        </Requirement>
+        <Requirement condition="!($datasetsCombo == 'oneDataSet' &amp;&amp;              $nPartitions == '2' &amp;&amp; $useNonSampledObs == '1' &amp;&amp;              ($partitionDataValue1 == $partitionDataValue2 || $partitionDataValue1 == $nonSampledPartitionDataValue || $nonSampledPartitionDataValue == $partitionDataValue2)             )">
+            <Message nlsKey="partition12NonSampUniqueValuesRequirementKey">The ID values for partitions 1 and 2 and the non-sampled cases must be different.</Message>
+        </Requirement>
+        <Requirement condition="!($datasetsCombo == 'oneDataSet' &amp;&amp;              $nPartitions == '3' &amp;&amp;              ($partitionDataValue1 == $partitionDataValue2 || $partitionDataValue1 == $partitionDataValue3 || $partitionDataValue2 == $partitionDataValue3)             )">
+            <Message nlsKey="partition123UniqueValuesRequirementKey">The ID values for partitions 1, 2, and 3 must be different.</Message>
+        </Requirement>
+        <Requirement condition="!($datasetsCombo == 'oneDataSet' &amp;&amp;              $nPartitions == '3' &amp;&amp; $useNonSampledObs == '1' &amp;&amp;             ($partitionDataValue1 == $partitionDataValue2 || $partitionDataValue1 == $partitionDataValue3 ||              $partitionDataValue2 == $partitionDataValue3 || $partitionDataValue1 == $nonSampledPartitionDataValue ||             $partitionDataValue2 == $nonSampledPartitionDataValue || $partitionDataValue3 == $nonSampledPartitionDataValue)             )">
+            <Message nlsKey="partition123NonSampUniqueValuesRequirementKey">The ID values for partitions 1, 2, and 3 and the non-sampled cases must be different.</Message>
+        </Requirement>
+        <Requirement condition="!($datasetsCombo == 'oneDataSet' &amp;&amp;              $nPartitions == '4' &amp;&amp;              ($partitionDataValue1 == $partitionDataValue2 ||              $partitionDataValue1 == $partitionDataValue3 ||             $partitionDataValue1 == $partitionDataValue4 ||              $partitionDataValue2 == $partitionDataValue3 ||             $partitionDataValue2 == $partitionDataValue4 ||             $partitionDataValue3 == $partitionDataValue4 )             )">
+            <Message nlsKey="partition1234UniqueValuesRequirementKey">The ID values for partitions 1, 2, 3, and 4 must be different.</Message>
+        </Requirement>
+        <Requirement condition="!($datasetsCombo == 'oneDataSet' &amp;&amp;              $nPartitions == '4' &amp;&amp; $useNonSampledObs == '1' &amp;&amp;             ($partitionDataValue1 == $partitionDataValue2 ||              $partitionDataValue1 == $partitionDataValue3 ||             $partitionDataValue1 == $partitionDataValue4 ||              $partitionDataValue2 == $partitionDataValue3 ||             $partitionDataValue2 == $partitionDataValue4 ||             $partitionDataValue3 == $partitionDataValue4 ||              $partitionDataValue1 == $nonSampledPartitionDataValue ||             $partitionDataValue2 == $nonSampledPartitionDataValue ||              $partitionDataValue3 == $nonSampledPartitionDataValue ||              $partitionDataValue4 == $nonSampledPartitionDataValue)             )">
+            <Message nlsKey="partition1234NonSampUniqueValuesRequirementKey">The ID values for partitions 1, 2, 3, and 4 and the non-sampled cases must be different.</Message>
+        </Requirement>
+
+    </Requirements>
+
+    <CodeTemplate>
+        <![CDATA[
+
+## Calculate maximum length of ID values
+#set($idMaxLength=$partitionDataValue1.length())
+#if ($nPartitions >= 2) #set($idMaxLength=$MathTool.max($idMaxLength, $partitionDataValue2.length() ))#end
+#if ($nPartitions >= 3) #set($idMaxLength=$MathTool.max($idMaxLength, $partitionDataValue3.length() ))#end
+#if ($nPartitions >= 4) #set($idMaxLength=$MathTool.max($idMaxLength, $partitionDataValue4.length() ))#end
+#if ($useNonSampledObs == 1)#set($idMaxLength=$MathTool.max($idMaxLength, $nonSampledPartitionDataValue.length() ))#end
+
+#if ($strataVariables.size() > 0)
+proc sort data=$dataset out=work._sorted_; 
+   #if ($dataset.getWhereClause() != '')
+   where $dataset.getWhereClause();
+   #end
+   by #foreach( $item in $strataVariables ) $item #end;
+run;
+
+proc means data=work._sorted_ noprint; 
+   by #foreach( $item in $strataVariables ) $item #end;
+   output out=work._meansOut_(drop=_type_ _freq_) n=__nobs__;
+run;
+#end
+
+proc sql noprint;
+#if ($strataVariables.size() > 0)
+select max(__nobs__) into :count from work._meansOut_;
+#else
+select count(*) into :count from $dataset
+   #if ($dataset.getWhereClause() != '')
+   where $dataset.getWhereClause()
+   #end
+;
+#end
+quit;
+
+#if ($datasetsCombo == 'oneDataSet')
+data $outDsname;
+#else
+data
+    $partitionOutDsname1
+   #if ($nPartitions >= 2) $partitionOutDsname2#end
+   #if ($nPartitions >= 3) $partitionOutDsname3#end
+   #if ($nPartitions >= 4) $partitionOutDsname4#end
+;
+#end
+
+#if ($strataVariables.size() > 0)
+   set work._sorted_;
+   by #foreach( $item in $strataVariables ) $item #end;   
+#else
+   set $dataset;
+   #if ($dataset.getWhereClause() != '')
+   where $dataset.getWhereClause();
+   #end
+#end
+
+#if ($datasetsCombo == 'oneDataSet')
+    length $CTMUtil.toSASName($partitionVarName) $ $idMaxLength;
+#end
+      retain __tmp1-__tmp%trim(&count) __nobs__ __nobs1__
+      #if ($nPartitions >= 2) __nobs2__
+         #if ($nPartitions >= 3) __nobs3__
+            #if ($nPartitions >= 4) __nobs4__#end
+         #end
+      #end;
+#if ($strataVariables.size() > 0)
+    retain __nobs__ __seed__ _n1_ ;
+    drop __k__;
+#end
+      drop _i_ __seed__ __tmp1-__tmp%trim(&count);
+      drop _n1_ __nobs__ __nobs1__
+      #if ($nPartitions >= 2) __nobs2__ 
+         #if ($nPartitions >= 3) __nobs3__
+            #if ($nPartitions >= 4) __nobs4__
+            #end
+         #end
+      #end;
+      array __tmp(*) __tmp1-__tmp%trim(&count);
+   if (_n_ = 1) then do;
+#if ($useRandomSeed == '1') __seed__=$randomSeed;#else __seed__ = -1;#end    
+      __nobs__=&count;
+      
+#if ($strataVariables.size() > 0)
+      end;
+
+   #foreach( $item in $strataVariables )
+      #if( $foreach.hasNext )#else
+         #if ($item == $item.get('value'))
+   if first.$item then do;
+         #else
+   if 'first.$item.get("value")'n then do;
+         #end
+      #end
+#end
+
+      set work._meansOut_; 
+      by #foreach( $item in $strataVariables ) $item #end;   
+      do _i_=1 to __nobs__;__tmp(_i_)=_i_; end;
+      if (__nobs__ < dim(__tmp)) then do;
+         do _i_=__nobs__+1 to dim(__tmp); __tmp(_i_)=0; end;
+      end;
+           
+      call ranperm(__seed__, of __tmp(*));
+      
+      if (__nobs__ < dim(__tmp)) then do;
+      * Move non-zero values to beginning of list;
+         do _i_= 1 to dim(__tmp);  
+            if (__tmp(_i_) = 0) then do;
+               if (_i_ < dim(__tmp)) then do;
+                  __k__= _i_ + 1;
+                  do while( __k__ < dim(__tmp) and __tmp(__k__) = 0 );
+                     __k__=__k__+1;
+                  end;
+                  if (__k__ <= dim(__tmp)) then do;
+                      __tmp(_i_) = __tmp(__k__);
+                      __tmp(__k__) = 0;
+                  end;
+               end; 
+            end;
+          end;
+       end;
+       _n1_ = 0;
+#else
+      do _i_ = 1 to dim(__tmp); __tmp(_i_) = _i_; end;
+      call ranperm(__seed__, of __tmp(*));
+#end      
+   
+      __nobs1__ = round($partitionFraction1*__nobs__);
+   #if ($nPartitions >= 2)
+      __nobs2__ = round($partitionFraction2*__nobs__)+__nobs1__;
+      #if ($nPartitions >= 3)
+      __nobs3__ = round($partitionFraction3*__nobs__)+__nobs2__;
+      #if ($nPartitions >= 4)
+      __nobs4__ = round($partitionFraction4*__nobs__)+__nobs3__;
+      #end
+      #end
+   #end
+   end;
+ 
+#if ($strataVariables.size() > 0)
+   _n1_ = _n1_ + 1;
+#else
+   _n1_ = _n_;
+#end     
+     
+#if ($datasetsCombo == 'oneDataSet')
+   if (_n1_ <= dim(__tmp)) then do;
+      if (__tmp(_n1_) > 0) then do;
+      if (__tmp(_n1_) <= __nobs1__) then do; $CTMUtil.toSASName($partitionVarName) = "$partitionDataValue1"; output; end;
+   #if ($nPartitions >= 2)
+      else if (__tmp(_n1_) <= __nobs2__) then do; $CTMUtil.toSASName($partitionVarName) = "$partitionDataValue2"; output; end;
+      #if ($nPartitions >= 3)
+      else if (__tmp(_n1_) <= __nobs3__) then do; $CTMUtil.toSASName($partitionVarName) = "$partitionDataValue3"; output; end;
+         #if ($nPartitions >= 4)
+      else if (__tmp(_n1_) <= __nobs4__) then do; $CTMUtil.toSASName($partitionVarName) = "$partitionDataValue4"; output; end;
+         #end
+      #end
+   #end
+   #if ($useNonSampledObs == 1)
+      else do; $CTMUtil.toSASName($partitionVarName) = "$nonSampledPartitionDataValue"; output; end;
+   #end
+   end;
+   end;
+#else
+   if (_n1_ <= dim(__tmp)) then do;
+      if (__tmp(_n1_) > 0) then do;
+      if (__tmp(_n1_) <= __nobs1__) then do; output $partitionOutDsname1; end;
+   #if ($nPartitions >= 2)
+      else if (__tmp(_n1_) <= __nobs2__) then do; output $partitionOutDsname2; end;
+      #if ($nPartitions >= 3)
+      else if (__tmp(_n1_) <= __nobs3__) then do; output $partitionOutDsname3; end;
+         #if ($nPartitions >= 4)
+      else if (__tmp(_n1_) <= __nobs4__) then do; output $partitionOutDsname4; end;
+         #end
+      #end
+   #end
+   end;
+   end;
+#end
+run;
+
+#if ($showData == '1')
+ods noproctitle;
+   #if ($datasetsCombo == 'oneDataSet')
+#if($showDataCombo == 'showSubsetDataChoice')
+#set( $finalTitle = $subsetTitle.replace("{1}", $outDsname) )
+#end
+proc print data=$outDsname#if($showDataCombo == 'showSubsetDataChoice')(obs=$subsetNobs)#end;
+title "#if($showDataCombo == 'showSubsetDataChoice')$finalTitle#{else}$outDsname#end";
+run;
+   #else
+#if($showDataCombo == 'showSubsetDataChoice')
+#set( $finalTitle1 = $subsetTitle.replace("{1}", $partitionOutDsname1) )
+#end
+proc print data=$partitionOutDsname1#if($showDataCombo == 'showSubsetDataChoice')(obs=$subsetNobs)#end;
+title "#if($showDataCombo == 'showSubsetDataChoice')$finalTitle1#{else}$partitionOutDsname1#end";
+run;
+      #if ($nPartitions >= 2)
+#if($showDataCombo == 'showSubsetDataChoice')
+#set( $finalTitle2 = $subsetTitle.replace("{1}", $partitionOutDsname2) )
+#end
+proc print data=$partitionOutDsname2#if($showDataCombo == 'showSubsetDataChoice')(obs=$subsetNobs)#end;
+title "#if($showDataCombo == 'showSubsetDataChoice')$finalTitle2#{else}$partitionOutDsname2#end";
+run;
+      #end
+      #if ($nPartitions >= 3)
+#if($showDataCombo == 'showSubsetDataChoice')
+#set( $finalTitle3 = $subsetTitle.replace("{1}", $partitionOutDsname3) )
+#end
+proc print data=$partitionOutDsname3#if($showDataCombo == 'showSubsetDataChoice')(obs=$subsetNobs)#end;
+title "#if($showDataCombo == 'showSubsetDataChoice')$finalTitle3#{else}$partitionOutDsname3#end";
+run;
+      #end
+      #if ($nPartitions >= 4)
+#if($showDataCombo == 'showSubsetDataChoice')
+#set( $finalTitle4 = $subsetTitle.replace("{1}", $partitionOutDsname4) )
+#end
+proc print data=$partitionOutDsname4#if($showDataCombo == 'showSubsetDataChoice')(obs=$subsetNobs)#end;
+title "#if($showDataCombo == 'showSubsetDataChoice')$finalTitle4#{else}$partitionOutDsname4#end";
+run;
+      #end
+   #end
+title;
+#end
+
+
+#if ($strataVariables.size() > 0)
+proc delete data=work._sorted_; run;
+proc delete data=work._meansOut_; run;
+#end
+
+        ]]>
+    </CodeTemplate>
+
+<TemplateValues version="3.5">
+<![CDATA[
+{"rolesGroup":"ROLES","randomSeed":"","individualDataSets":"Partitions in individual data sets","nPartitions":"2","partitionDataValue1":"Partition 1","outputGroup":"OUTPUT DATA SET","partitionDataValue2":"Partition 2","partitionDataValue3":"Partition 3","partitionDataValue4":"Partition 4","subsetNobs":"10","oneDataSet":"All partitions in one data set","useRandomSeed":"0","showAllDataChoice":"Show all output data","strataVariables":"","showDataGroup":"Show Output Data","partitionGroup":"PARTITION DATA","showDataCombo":"showSubsetDataChoice","useNonSampledObs":"0","sasOS":"Linux LIN X64 2.6.32-573.18.1.el6.x86_64","dataGroup":"DATA","partitionVarName":"_Partition_","showData":"0","sasVersion":"9.43","subsetTitle":"Subset of {1}","outDsname":"Partition","dataTab":"DATA","optionsTab":"OPTIONS","partitionOutDsname1":"Partition1","showSubsetDataChoice":"Show subset of output data","partitionOutDsname3":"Partition3","partitionOutDsname2":"Partition2","partitionOutDsname4":"Partition4","datasetsCombo":"individualDataSets","nonSampledPartitionDataValue":"","partitionFraction4":"","dataset":{"librarytable":"SALARY.DATA"},"partitionFraction1":"0.7","partitionFraction2":"0.3","partitionFraction3":"","otherRolesGroup":"ADDITIONAL ROLES"}
+]]>
+</TemplateValues>
+</Task>
